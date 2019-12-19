@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 const LinkedList = require('./LinkedList');
 /** 
  * 1. Understanding merge sort
@@ -212,7 +213,7 @@ function merge(left, right, array) {
  /**
   * 6. Bucket sort
   */
-  const bucketData = [5,7,9,2,24,45,13,16,12,8,3,1];
+  const bucketData = [1,2,1,1,3,6,2,7,5,2,4,3];
   
   function bucketSort(arr,min,max) {
       let array = new Array(max-min); //creates an array with empty spaces based on the difference between max and min
@@ -221,7 +222,7 @@ function merge(left, right, array) {
       }
       return array.filter((n) => n); //removing extra empty items from the new Array
   }
-//   console.log(bucketSort(bucketData, 0, 100));
+console.log(bucketSort(bucketData, 1, 5));
 
   /**
    * 7. Sort in place
@@ -233,3 +234,35 @@ function randomSort(arr) {
     return arr;
 }
 // console.log(randomSort(bucketData));
+
+/**
+ * 8. Sorting books
+ */
+
+ const bookArr = ['Harry Potter', 'Game of Thrones', 'Lord of the Rings', 'Guardians of The Galaxy', 
+ 'In Search of Lost', 'Ulysses', 'Don Quixote', 'The Great Gatsby', 'Moby Dick', 'One Hundred Years of Solitude',
+ 'War and Peace','Hamlet', 'The Divine Comedy', 'The Catcher in the Rye','Alice Adventures in Wonderland'];
+ 
+ function bookSort(bookArr, start=0, end = bookArr.length) {
+    if(start >= end) {
+        return bookArr;
+    }                                       
+    const middle = partition(bookArr, start, end); 
+    bookArr = quickSort(bookArr, start, middle); 
+    bookArr = quickSort(bookArr, middle + 1, end); 
+    return bookArr;
+}
+
+function bookPartition(bookArr, start, end) {
+    const pivot = bookArr[end - 1]; 
+    let j = start; 
+    for(let i = start; i < end - 1; i++) {
+        if(bookArr[i] <= pivot) {
+            swap(bookArr, i, j);
+            j++;
+        }
+    }
+    swap(bookArr, end-1, j);
+    return j;
+}
+// console.log(bookSort(bookArr));
