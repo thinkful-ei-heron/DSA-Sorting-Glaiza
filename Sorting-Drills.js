@@ -11,13 +11,13 @@ const LinkedList = require('./LinkedList');
  *  merge = Array[1, 21]
  * RC @5 = middle(1) L[26] R[45]
  *  merge = Array[26, 45]
- *  merge = Array[1, 21, 26, 45] //combines the RC@6 and RC@10
+ *  merge = Array[1, 21, 26, 45]
  * RC @6 = middle(2) L[29, 28] --->  R[2, 9]
  * RC @7 = middle(1) L[29] R[28] 
  *  merge = Array[28, 29]
  * RC @8 = middle(1) L[2] R[9]
  *  merge = Array[2, 9]
- *  merge = Array[2,9,28,29] //combines the RC@16 and RC@20
+ *  merge = Array[2,9,28,29]
  *  merge = Array[1,2,9,21,26,28,29,45] //Left Side Done
  * 
  * Right Side 
@@ -27,15 +27,15 @@ const LinkedList = require('./LinkedList');
  *  merge = Array[16,49]
  * RC 12 = middle(1) L[39] ---> R[27]
  *  merge = Array[27,39]
- *  merge = Array[16,27,39,49]//Combines RC @27 and RC@31
+ *  merge = Array[16,27,39,49]
  * RC 13 = middle(2) = L[43,34] --> R[46,40]
  * RC 14 = middle(1) = L[43] --> R[34]
  *  merge = Array[34,43]
  * RC @15 = middle(1) = L[46] R[40]
  *  merge = Array[40,46]
- *  merge = Array[34,40,43,46] //RC @37 and RC @41
- *  merge = Array[16,27,34,39,40,43,46,49] //RC @32 and RC@42
- * RC @16 merge = Array[1,2,9,16,21,26,27,28,29,34,39,40,43,45,46,49] //Left-->RC @22 and Right-->RC@43
+ *  merge = Array[34,40,43,46] 
+ *  merge = Array[16,27,34,39,40,43,46,49] 
+ * RC @16 merge = Array[1,2,9,16,21,26,27,28,29,34,39,40,43,45,46,49] 
  * 
  * a. What is the resulting list that will be sorted after 3 recursive calls to mergesort?
  *    Recursive Call #3 - middle(2) L[21, 1] ---> R[26, 45]
@@ -222,7 +222,7 @@ function merge(left, right, array) {
       }
       return array.filter((n) => n); //removing extra empty items from the new Array
   }
-console.log(bucketSort(bucketData, 1, 5));
+// console.log(bucketSort(bucketData, 1, 5));
 
   /**
    * 7. Sort in place
@@ -247,7 +247,7 @@ function randomSort(arr) {
     if(start >= end) {
         return bookArr;
     }                                       
-    const middle = partition(bookArr, start, end); 
+    const middle = bookPartition(bookArr, start, end); 
     bookArr = quickSort(bookArr, start, middle); 
     bookArr = quickSort(bookArr, middle + 1, end); 
     return bookArr;
@@ -265,4 +265,4 @@ function bookPartition(bookArr, start, end) {
     swap(bookArr, end-1, j);
     return j;
 }
-// console.log(bookSort(bookArr));
+console.log(bookSort(bookArr));
