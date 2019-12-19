@@ -24,6 +24,7 @@ function bubbleSort(array) {
     return array; //sorted array
 }
 
-export default  {
-    swap
+module.exports= {
+    swap,
+    bubbleSort
 };

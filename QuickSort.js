@@ -1,5 +1,5 @@
 
-import swap from './BubbleSort';
+const swap = require ('./BubbleSort');
 
 //it uses a  divide and conquer approach
 function quickSort(array, start=0, end = array.length) {
@@ -27,3 +27,4 @@ function partition(array, start, end) {
     swap(array, end-1, j);
     return j;
 }
+console.log(quickSort(arr))
