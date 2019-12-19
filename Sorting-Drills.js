@@ -1,3 +1,4 @@
+const LinkedList = require('./LinkedList');
 /** 
  * 1. Understanding merge sort
  * Array = [21, 1, 26, 45, 29, 28, 2, 9, 16, 49, 39, 27, 43, 34, 46, 40]
@@ -112,13 +113,11 @@
  */
 /**
  * #3 Implementing quicksort
- * 
  */
 function quickSort(array, start=0, end = array.length) {
     if(start >= end) {
         return array;
-    }
-                                                 
+    }                                       
     const middle = partition(array, start, end); 
     array = quickSort(array, start, middle); 
     array = quickSort(array, middle + 1, end); 
@@ -151,4 +150,86 @@ let arr = [89,30,25,32,72,70,51,42,25,24,53,55,78,50,13,40,48,32,26,2,
     6,39,42,51,54,84,34,53,78,40,14,5
   ];
 //   console.log(partition(arr,0, arr.length));
-  console.log(quickSort(arr));
+// console.log(quickSort(arr));
+
+/**
+ * #4 Implementing merge sort
+ */
+function mergeSort(array) {
+    if(array.length <=1) { 
+        return array;
+    }
+    const middle = Math.floor(array.length / 2); 
+    let left = array.slice(0, middle); 
+    let right = array.slice(middle, array.length);
+
+    left = mergeSort(left); 
+    right = mergeSort(right); 
+    return merge(left, right, array); 
+}                                     
+
+function merge(left, right, array) {
+    let leftIndex = 0;
+    let rightIndex = 0;
+    let outputIndex = 0;
+    while(leftIndex < left.length && rightIndex < right.length) {
+        if(left[leftIndex] < right[rightIndex]) {
+            array[outputIndex++] = left[leftIndex++];
+        }
+        else {
+            array[outputIndex++] = right[rightIndex++];
+        }
+    }
+    for(let i = leftIndex; i < left.length; i++) {
+        array[outputIndex++] = left[i];
+    }
+
+    for(let i = rightIndex; i < right.length; i++) {
+        array[outputIndex++] = right[i];
+    }
+    return array;
+}
+// console.log(mergeSort(arr));
+/**
+ * 5. Sorting a linked list using merge sort
+ */
+//[89,30,25,32,72,70,51,42,25,24]
+ let LL = new LinkedList();
+ LL.insertLast(89);
+ LL.insertLast(30);
+ LL.insertLast(25);
+ LL.insertLast(32);
+ LL.insertLast(72);
+ LL.insertLast(70);
+ LL.insertLast(51);
+ LL.insertLast(42);
+ LL.insertLast(24);
+ LL.insertLast(53);
+ //console.log(LL);
+ const listArr = LL.display();
+//  console.log(mergeSort(listArr)); //[ 24, 25, 30, 32, 42, 51, 53, 70, 72, 89 ]
+
+ /**
+  * 6. Bucket sort
+  */
+  const bucketData = [5,7,9,2,24,45,13,16,12,8,3,1];
+  
+  function bucketSort(arr,min,max) {
+      let array = new Array(max-min); //creates an array with empty spaces based on the difference between max and min
+      for(let i = 0; i < arr.length; i++) {
+          array[arr[i] - min] = arr[i];
+      }
+      return array.filter((n) => n); //removing extra empty items from the new Array
+  }
+//   console.log(bucketSort(bucketData, 0, 100));
+
+  /**
+   * 7. Sort in place
+   */
+function randomSort(arr) {
+    for(let i=0; i<Math.floor(arr.length/2); i++) {
+       swap(arr, i, Math.floor(Math.random() * (arr.length)));
+    }
+    return arr;
+}
+// console.log(randomSort(bucketData));

@@ -21,7 +21,7 @@ function bubbleSort(array) {
 }
 
 //Merge Sort
-function mergeSort(array, n = array.length) {
+function mergeSort(array) {
     if(array.length <=1) { //if array has 1 or 0 elements it means it is sorted
         return array;
     }
